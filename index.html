@@ -4,30 +4,126 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dairy Manager</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f8f5;color:#173b2b}
-header{background:#168447;color:white;padding:20px;text-align:center}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f8f5;
+color:#173b2b
+}
+
+header{
+background:#168447;
+color:white;
+padding:20px;
+text-align:center
+}
+
 header h1{margin:0;font-size:28px}
 header p{margin:8px 0 0}
-nav{display:flex;gap:8px;background:white;padding:10px;overflow:auto}
-nav button{border:0;background:#e8f3ec;padding:12px;border-radius:8px;white-space:nowrap}
-nav button.active,button.primary{background:#168447;color:white}
-main{padding:15px;max-width:800px;margin:auto}
-.card{background:white;padding:18px;border-radius:14px;margin-bottom:15px;box-shadow:0 2px 8px #0001}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.stat{background:#e9f7ee;padding:15px;border-radius:12px}
-.stat b{font-size:22px;display:block;margin-top:5px}
-input,select{width:100%;padding:12px;margin:6px 0 12px;border:1px solid #ccc;border-radius:8px;font-size:16px}
-button{cursor:pointer;font-size:15px}
-.primary{border:0;padding:12px 18px;border-radius:8px}
-.danger{background:#d93636;color:white;border:0;padding:8px;border-radius:6px}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left}
+
+nav{
+display:flex;
+gap:8px;
+background:white;
+padding:10px;
+overflow:auto
+}
+
+nav button{
+border:0;
+background:#e8f3ec;
+padding:12px;
+border-radius:8px;
+white-space:nowrap
+}
+
+nav button.active,
+button.primary{
+background:#168447;
+color:white
+}
+
+main{
+padding:15px;
+max-width:800px;
+margin:auto
+}
+
+.card{
+background:white;
+padding:18px;
+border-radius:14px;
+margin-bottom:15px;
+box-shadow:0 2px 8px #0001
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px
+}
+
+.stat{
+background:#e9f7ee;
+padding:15px;
+border-radius:12px
+}
+
+.stat b{
+font-size:22px;
+display:block;
+margin-top:5px
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin:6px 0 12px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px
+}
+
+button{
+cursor:pointer;
+font-size:15px
+}
+
+.primary{
+border:0;
+padding:12px 18px;
+border-radius:8px
+}
+
+.danger{
+background:#d93636;
+color:white;
+border:0;
+padding:8px;
+border-radius:6px
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:14px
+}
+
+th,td{
+padding:10px;
+border-bottom:1px solid #ddd;
+text-align:left
+}
+
 .hidden{display:none}
 h2{margin-top:5px}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -36,45 +132,58 @@ h2{margin-top:5px}
 </header>
 
 <nav>
-<button onclick="showPage('dashboard')" class="active">Dashboard</button>
-<button onclick="showPage('customers')">Customers</button>
-<button onclick="showPage('daily')">Daily Milk</button>
-<button onclick="showPage('payments')">Payments</button>
+<button onclick="showPage('dashboard',this)" class="active">Dashboard</button>
+<button onclick="showPage('customers',this)">Customers</button>
+<button onclick="showPage('daily',this)">Daily Milk</button>
+<button onclick="showPage('payments',this)">Payments</button>
 </nav>
 
 <main>
 
 <section id="dashboard">
 <h2>Dashboard</h2>
+
 <div class="grid">
 <div class="stat">Customers<b id="totalCustomers">0</b></div>
 <div class="stat">Total Milk<b id="totalMilk">0 L</b></div>
 <div class="stat">Total Balance<b id="totalBalance">₹0</b></div>
 <div class="stat">Payments<b id="totalPayments">₹0</b></div>
 </div>
+
 <div class="card">
 <h3>Welcome to Dairy Manager</h3>
 <p>Manage customers, daily milk entries and payments easily.</p>
 </div>
 </section>
 
+
 <section id="customers" class="hidden">
 <h2>Customers</h2>
+
 <div class="card">
 <input id="customerName" placeholder="Customer name">
 <input id="customerPhone" placeholder="Phone number">
 <button class="primary" onclick="addCustomer()">Add Customer</button>
 </div>
+
 <div class="card">
 <table>
-<thead><tr><th>Name</th><th>Phone</th><th>Action</th></tr></thead>
+<thead>
+<tr>
+<th>Name</th>
+<th>Phone</th>
+<th>Action</th>
+</tr>
+</thead>
 <tbody id="customerList"></tbody>
 </table>
 </div>
 </section>
 
+
 <section id="daily" class="hidden">
 <h2>Daily Milk Entry</h2>
+
 <div class="card">
 <label>Customer</label>
 <select id="milkCustomer"></select>
@@ -90,16 +199,27 @@ h2{margin-top:5px}
 
 <button class="primary" onclick="addMilk()">Save Milk Entry</button>
 </div>
+
 <div class="card">
 <table>
-<thead><tr><th>Date</th><th>Customer</th><th>Milk</th><th>Amount</th></tr></thead>
+<thead>
+<tr>
+<th>Date</th>
+<th>Customer</th>
+<th>Milk</th>
+<th>Amount</th>
+<th>Action</th>
+</tr>
+</thead>
 <tbody id="milkList"></tbody>
 </table>
 </div>
 </section>
 
+
 <section id="payments" class="hidden">
 <h2>Payments</h2>
+
 <div class="card">
 <label>Customer</label>
 <select id="paymentCustomer"></select>
@@ -112,9 +232,17 @@ h2{margin-top:5px}
 
 <button class="primary" onclick="addPayment()">Save Payment</button>
 </div>
+
 <div class="card">
 <table>
-<thead><tr><th>Date</th><th>Customer</th><th>Amount</th></tr></thead>
+<thead>
+<tr>
+<th>Date</th>
+<th>Customer</th>
+<th>Amount</th>
+<th>Action</th>
+</tr>
+</thead>
 <tbody id="paymentList"></tbody>
 </table>
 </div>
@@ -122,10 +250,13 @@ h2{margin-top:5px}
 
 </main>
 
+
 <script>
+
 let customers=JSON.parse(localStorage.getItem("customers")||"[]");
 let milk=JSON.parse(localStorage.getItem("milk")||"[]");
 let payments=JSON.parse(localStorage.getItem("payments")||"[]");
+
 
 function save(){
 localStorage.setItem("customers",JSON.stringify(customers));
@@ -133,103 +264,268 @@ localStorage.setItem("milk",JSON.stringify(milk));
 localStorage.setItem("payments",JSON.stringify(payments));
 }
 
-function showPage(page){
-document.querySelectorAll("main>section").forEach(x=>x.classList.add("hidden"));
+
+function showPage(page,btn){
+document.querySelectorAll("main>section")
+.forEach(x=>x.classList.add("hidden"));
+
 document.getElementById(page).classList.remove("hidden");
-document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));
-event.target.classList.add("active");
+
+document.querySelectorAll("nav button")
+.forEach(x=>x.classList.remove("active"));
+
+btn.classList.add("active");
+
 render();
 }
+
 
 function addCustomer(){
+
 let name=document.getElementById("customerName").value.trim();
 let phone=document.getElementById("customerPhone").value.trim();
-if(!name)return alert("Customer name likhiye");
-customers.push({id:Date.now(),name,phone});
-save();
-document.getElementById("customerName").value="";
-document.getElementById("customerPhone").value="";
-render();
-alert("Customer added");
+
+if(!name){
+alert("Customer name likhiye");
+return;
 }
 
+customers.push({
+id:Date.now(),
+name:name,
+phone:phone
+});
+
+save();
+
+document.getElementById("customerName").value="";
+document.getElementById("customerPhone").value="";
+
+render();
+
+alert("Customer added successfully");
+}
+
+
 function addMilk(){
+
 let customerId=document.getElementById("milkCustomer").value;
 let date=document.getElementById("milkDate").value;
 let qty=parseFloat(document.getElementById("milkQty").value);
 let rate=parseFloat(document.getElementById("milkRate").value);
-if(!customerId||!date||!qty)return alert("Sab details bhariye");
-milk.push({customerId,date,qty,rate,amount:qty*rate});
-save();
-document.getElementById("milkQty").value="";
-render();
-alert("Milk entry saved");
+
+if(!customerId||!date||!qty||!rate){
+alert("Sab details bhariye");
+return;
 }
 
+milk.push({
+id:Date.now(),
+customerId:customerId,
+date:date,
+qty:qty,
+rate:rate,
+amount:qty*rate
+});
+
+save();
+
+document.getElementById("milkQty").value="";
+
+render();
+
+alert("Milk entry saved successfully");
+}
+
+
 function addPayment(){
+
 let customerId=document.getElementById("paymentCustomer").value;
 let date=document.getElementById("paymentDate").value;
 let amount=parseFloat(document.getElementById("paymentAmount").value);
-if(!customerId||!date||!amount)return alert("Sab details bhariye");
-payments.push({customerId,date,amount});
-save();
-document.getElementById("paymentAmount").value="";
-render();
-alert("Payment saved");
+
+if(!customerId||!date||!amount){
+alert("Sab details bhariye");
+return;
 }
 
+payments.push({
+id:Date.now(),
+customerId:customerId,
+date:date,
+amount:amount
+});
+
+save();
+
+document.getElementById("paymentAmount").value="";
+
+render();
+
+alert("Payment saved successfully");
+}
+
+
+// DELETE CUSTOMER
 function deleteCustomer(id){
-if(confirm("Delete customer?")){
+
+if(confirm("Kya aap is customer ko delete karna chahte hain?")){
+
 customers=customers.filter(x=>x.id!=id);
-save();render();
+
+save();
+render();
+
 }
 }
+
+
+// DELETE MILK ENTRY
+function deleteMilk(id){
+
+if(confirm("Kya aap ye milk entry delete karna chahte hain?")){
+
+milk=milk.filter(x=>x.id!=id);
+
+save();
+render();
+
+}
+}
+
+
+// DELETE PAYMENT
+function deletePayment(id){
+
+if(confirm("Kya aap ye payment delete karna chahte hain?")){
+
+payments=payments.filter(x=>x.id!=id);
+
+save();
+render();
+
+}
+}
+
 
 function cname(id){
+
 let c=customers.find(x=>x.id==id);
+
 return c?c.name:"Unknown";
+
 }
 
+
 function render(){
-document.getElementById("totalCustomers").innerText=customers.length;
+
+document.getElementById("totalCustomers").innerText=
+customers.length;
+
 document.getElementById("totalMilk").innerText=
-milk.reduce((a,x)=>a+x.qty,0).toFixed(1)+" L";
+milk.reduce((a,x)=>a+Number(x.qty),0).toFixed(1)+" L";
+
 document.getElementById("totalBalance").innerText=
-"₹"+milk.reduce((a,x)=>a+x.amount,0).toFixed(2);
+"₹"+milk.reduce((a,x)=>a+Number(x.amount),0).toFixed(2);
+
 document.getElementById("totalPayments").innerText=
-"₹"+payments.reduce((a,x)=>a+x.amount,0).toFixed(2);
+"₹"+payments.reduce((a,x)=>a+Number(x.amount),0).toFixed(2);
 
-document.getElementById("customerList").innerHTML=customers.map(c=>
-`<tr><td>${c.name}</td><td>${c.phone}</td>
-<td><button class="danger" onclick="deleteCustomer(${c.id})">Delete</button></td></tr>`).join("");
 
-let options='<option value="">Select Customer</option>'+
-customers.map(c=>`<option value="${c.id}">${c.name}</option>`).join("");
+// CUSTOMERS
+document.getElementById("customerList").innerHTML=
+customers.map(c=>`
+
+<tr>
+<td>${c.name}</td>
+<td>${c.phone}</td>
+<td>
+<button class="danger"
+onclick="deleteCustomer(${c.id})">
+Delete
+</button>
+</td>
+</tr>
+
+`).join("");
+
+
+// CUSTOMER OPTIONS
+let options=
+'<option value="">Select Customer</option>'+
+customers.map(c=>
+`<option value="${c.id}">${c.name}</option>`
+).join("");
+
 document.getElementById("milkCustomer").innerHTML=options;
 document.getElementById("paymentCustomer").innerHTML=options;
 
-document.getElementById("milkList").innerHTML=milk.map(x=>
-`<tr><td>${x.date}</td><td>${cname(x.customerId)}</td>
-<td>${x.qty} L</td><td>₹${x.amount.toFixed(2)}</td></tr>`).join("");
 
-document.getElementById("paymentList").innerHTML=payments.map(x=>
-`<tr><td>${x.date}</td><td>${cname(x.customerId)}</td>
-<td>₹${x.amount.toFixed(2)}</td></tr>`).join("");
+// MILK LIST WITH DELETE
+document.getElementById("milkList").innerHTML=
+milk.map(x=>`
+
+<tr>
+<td>${x.date}</td>
+<td>${cname(x.customerId)}</td>
+<td>${x.qty} L</td>
+<td>₹${Number(x.amount).toFixed(2)}</td>
+<td>
+<button class="danger"
+onclick="deleteMilk(${x.id})">
+Delete
+</button>
+</td>
+</tr>
+
+`).join("");
+
+
+// PAYMENT LIST WITH DELETE
+document.getElementById("paymentList").innerHTML=
+payments.map(x=>`
+
+<tr>
+<td>${x.date}</td>
+<td>${cname(x.customerId)}</td>
+<td>₹${Number(x.amount).toFixed(2)}</td>
+<td>
+<button class="danger"
+onclick="deletePayment(${x.id})">
+Delete
+</button>
+</td>
+</tr>
+
+`).join("");
+
 }
 
-// Date range: past 1 month to 1 year future
+
+// DATE RANGE
 let today=new Date();
+
 let minDate=new Date();
 minDate.setMonth(today.getMonth()-1);
+
 let maxDate=new Date();
 maxDate.setFullYear(today.getFullYear()+1);
 
+
 function formatDate(d){
-return d.toISOString().split("T")[0];
+
+let year=d.getFullYear();
+let month=String(d.getMonth()+1).padStart(2,"0");
+let day=String(d.getDate()).padStart(2,"0");
+
+return `${year}-${month}-${day}`;
+
 }
+
 
 document.getElementById("milkDate").min=formatDate(minDate);
 document.getElementById("milkDate").max=formatDate(maxDate);
+
 document.getElementById("paymentDate").min=formatDate(minDate);
 document.getElementById("paymentDate").max=formatDate(maxDate);
 
@@ -237,6 +533,7 @@ document.getElementById("milkDate").value=formatDate(today);
 document.getElementById("paymentDate").value=formatDate(today);
 
 render();
+
 </script>
 
 </body>
