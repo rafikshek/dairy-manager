@@ -6,399 +6,590 @@
 <title>Dairy Manager</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
-  font-family:Arial,sans-serif;
-  background:#f1f5f9;
-  color:#172033;
+  font-family:Arial, sans-serif;
+  background:#f4f7fb;
+  color:#222;
 }
+
 header{
-  background:#0f766e;
+  background:#087f5b;
   color:white;
   padding:18px;
   text-align:center;
+  font-size:24px;
+  font-weight:bold;
 }
+
 nav{
   display:flex;
   flex-wrap:wrap;
   gap:8px;
   padding:10px;
   background:white;
-  box-shadow:0 2px 8px #bbb;
+  box-shadow:0 2px 6px #ccc;
 }
+
 nav button{
   border:0;
-  background:#e2e8f0;
-  padding:11px 14px;
+  padding:11px 13px;
   border-radius:7px;
-  cursor:pointer;
+  background:#e7f5ef;
+  color:#075c43;
   font-weight:bold;
+  cursor:pointer;
 }
-nav button:hover{background:#99f6e4}
+
+nav button:hover{
+  background:#b7ead5;
+}
+
 .container{
   max-width:1200px;
   margin:auto;
   padding:15px;
 }
-.page{display:none}
-.page.active{display:block}
-.card-grid{
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.card{
+  background:white;
+  padding:15px;
+  border-radius:10px;
+  box-shadow:0 2px 8px #ddd;
+  margin-bottom:15px;
+}
+
+h2{
+  margin-top:0;
+  color:#087f5b;
+}
+
+.grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:12px;
-  margin:15px 0;
 }
-.card{
-  background:white;
-  padding:18px;
-  border-radius:12px;
-  box-shadow:0 2px 8px #d1d5db;
-}
-.card h3{
-  margin:0 0 8px;
-  font-size:15px;
-  color:#475569;
-}
-.card strong{
-  font-size:24px;
-  color:#0f766e;
-}
-.form-box{
-  background:white;
-  padding:18px;
-  border-radius:12px;
-  margin:15px 0;
-  box-shadow:0 2px 8px #d1d5db;
-}
+
 input,select{
   width:100%;
   padding:11px;
-  margin:6px 0 12px;
-  border:1px solid #cbd5e1;
-  border-radius:7px;
+  margin:6px 0 10px;
+  border:1px solid #bbb;
+  border-radius:6px;
   font-size:15px;
 }
-button.primary{
-  background:#0f766e;
+
+button{
+  padding:10px 14px;
+  border:0;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.btn{
+  background:#087f5b;
   color:white;
-  border:0;
-  padding:11px 18px;
-  border-radius:7px;
-  cursor:pointer;
 }
-button.danger{
-  background:#dc2626;
+
+.btn-danger{
+  background:#d62828;
   color:white;
-  border:0;
-  padding:7px 10px;
-  border-radius:5px;
-  cursor:pointer;
 }
-button.small{
-  padding:7px 10px;
-  border:0;
-  border-radius:5px;
-  cursor:pointer;
+
+.btn-blue{
+  background:#1971c2;
+  color:white;
 }
-.table-box{
-  overflow-x:auto;
-  background:white;
-  border-radius:10px;
-  box-shadow:0 2px 8px #d1d5db;
+
+.btn-whatsapp{
+  background:#25D366;
+  color:white;
 }
+
+.btn-small{
+  padding:6px 9px;
+  font-size:12px;
+  margin:2px;
+}
+
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:700px;
+  background:white;
+  margin-top:10px;
+  min-width:650px;
 }
+
+.table-wrap{
+  overflow-x:auto;
+}
+
 th,td{
-  padding:11px;
-  border-bottom:1px solid #e2e8f0;
+  border:1px solid #ddd;
+  padding:9px;
   text-align:left;
+  font-size:14px;
 }
+
 th{
-  background:#ccfbf1;
-  color:#134e4a;
+  background:#087f5b;
+  color:white;
 }
-.locked{
-  color:#64748b;
-  font-size:13px;
+
+tr:nth-child(even){
+  background:#f8f9fa;
 }
-.section-title{
-  margin-top:25px;
-  color:#0f766e;
+
+.summary{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:12px;
 }
-.notice{
-  background:#fef3c7;
-  padding:12px;
-  border-radius:8px;
-  margin:12px 0;
-  color:#92400e;
+
+.summary-box{
+  background:white;
+  padding:18px;
+  border-radius:10px;
+  box-shadow:0 2px 8px #ddd;
+  text-align:center;
 }
+
+.summary-box h3{
+  margin:0;
+  color:#087f5b;
+  font-size:14px;
+}
+
+.summary-box p{
+  font-size:22px;
+  font-weight:bold;
+  margin:10px 0 0;
+}
+
 .success{
-  background:#dcfce7;
+  background:#d3f9d8;
+  color:#176b2c;
   padding:12px;
-  border-radius:8px;
-  color:#166534;
+  border-radius:7px;
+  margin-top:10px;
 }
+
+.warning{
+  background:#fff3bf;
+  color:#8a6500;
+  padding:12px;
+  border-radius:7px;
+  margin-top:10px;
+}
+
+.danger-box{
+  background:#ffe3e3;
+  color:#a51111;
+  padding:12px;
+  border-radius:7px;
+  margin-top:10px;
+}
+
+.info{
+  background:#e7f5ff;
+  padding:12px;
+  border-radius:7px;
+  margin:10px 0;
+}
+
+.balance-positive{
+  color:#d62828;
+  font-weight:bold;
+}
+
+.balance-zero{
+  color:#087f5b;
+  font-weight:bold;
+}
+
 @media(max-width:600px){
-  header h1{font-size:22px}
-  nav button{font-size:12px;padding:9px}
+  header{
+    font-size:20px;
+  }
+
+  nav button{
+    font-size:12px;
+    padding:9px;
+  }
+
+  th,td{
+    font-size:12px;
+    padding:7px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>🥛 Dairy Manager</h1>
-  <p>Milk • Customers • Payments • Records</p>
-</header>
+<header>🥛 Dairy Manager</header>
 
 <nav>
   <button onclick="showPage('dashboard')">📊 Dashboard</button>
   <button onclick="showPage('customers')">👥 Customers</button>
   <button onclick="showPage('milk')">🥛 Daily Milk</button>
   <button onclick="showPage('payments')">💰 Payments</button>
-  <button onclick="showPage('records')">📚 All Records</button>
+  <button onclick="showPage('records')">📋 All Records</button>
+  <button onclick="showPage('statement')">👤 Payment Check</button>
 </nav>
 
 <div class="container">
 
 <!-- DASHBOARD -->
 <section id="dashboard" class="page active">
-  <h2>📊 Dashboard</h2>
+  <div class="card">
+    <h2>📊 Dashboard</h2>
+    <div class="summary">
+      <div class="summary-box">
+        <h3>Total Customers</h3>
+        <p id="dashCustomers">0</p>
+      </div>
 
-  <div class="notice">
-    Aaj ke records automatically fresh honge. Purane din ka milk/payment delete nahi kiya ja sakta.
-  </div>
+      <div class="summary-box">
+        <h3>Today Milk</h3>
+        <p id="dashTodayMilk">0 L</p>
+      </div>
 
-  <h3 class="section-title">Today's Summary</h3>
+      <div class="summary-box">
+        <h3>Today Milk Amount</h3>
+        <p id="dashTodayAmount">₹0</p>
+      </div>
 
-  <div class="card-grid">
-    <div class="card">
-      <h3>Today's Milk</h3>
-      <strong id="todayMilk">0 L</strong>
-    </div>
+      <div class="summary-box">
+        <h3>Total Milk</h3>
+        <p id="dashTotalMilk">0 L</p>
+      </div>
 
-    <div class="card">
-      <h3>Today's Milk Amount</h3>
-      <strong id="todayMilkAmount">₹0</strong>
-    </div>
+      <div class="summary-box">
+        <h3>Total Milk Amount</h3>
+        <p id="dashTotalAmount">₹0</p>
+      </div>
 
-    <div class="card">
-      <h3>Today's Payments</h3>
-      <strong id="todayPayments">₹0</strong>
-    </div>
+      <div class="summary-box">
+        <h3>Total Payments</h3>
+        <p id="dashPayments">₹0</p>
+      </div>
 
-    <div class="card">
-      <h3>Total Customers</h3>
-      <strong id="totalCustomers">0</strong>
-    </div>
-  </div>
-
-  <h3 class="section-title">All-Time Total</h3>
-
-  <div class="card-grid">
-    <div class="card">
-      <h3>Total Milk</h3>
-      <strong id="allMilk">0 L</strong>
-    </div>
-
-    <div class="card">
-      <h3>Total Milk Amount / Payout</h3>
-      <strong id="allMilkAmount">₹0</strong>
-    </div>
-
-    <div class="card">
-      <h3>Total Payments Received</h3>
-      <strong id="allPayments">₹0</strong>
-    </div>
-
-    <div class="card">
-      <h3>Outstanding Balance</h3>
-      <strong id="balance">₹0</strong>
+      <div class="summary-box">
+        <h3>Outstanding Balance</h3>
+        <p id="dashBalance">₹0</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- CUSTOMERS -->
 <section id="customers" class="page">
-  <h2>👥 Customers</h2>
+  <div class="card">
+    <h2>👥 Add Customer</h2>
 
-  <div class="form-box">
-    <h3>Add New Customer</h3>
+    <div class="grid">
+      <div>
+        <label>Customer Name</label>
+        <input id="customerName" placeholder="Customer name">
+      </div>
 
-    <label>Customer Name</label>
-    <input id="customerName" placeholder="Enter customer name">
+      <div>
+        <label>Village</label>
+        <input id="customerVillage" placeholder="Village name">
+      </div>
 
-    <label>Village</label>
-    <input id="customerVillage" placeholder="Enter village name">
+      <div>
+        <label>WhatsApp Mobile Number</label>
+        <input id="customerPhone" placeholder="10 digit mobile number">
+      </div>
+    </div>
 
-    <label>Phone Number</label>
-    <input id="customerPhone" placeholder="Enter phone number">
-
-    <button class="primary" onclick="addCustomer()">➕ Add Customer</button>
+    <button class="btn" onclick="addCustomer()">➕ Save Customer</button>
   </div>
 
-  <div class="table-box">
-    <table>
-      <thead>
-        <tr>
-          <th>Code</th>
-          <th>Name</th>
-          <th>Village</th>
-          <th>Phone</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="customerTable"></tbody>
-    </table>
+  <div class="card">
+    <h2>Customer List</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Village</th>
+            <th>Phone</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="customerTable"></tbody>
+      </table>
+    </div>
   </div>
 </section>
 
 <!-- DAILY MILK -->
 <section id="milk" class="page">
-  <h2>🥛 Daily Milk Entry</h2>
+  <div class="card">
+    <h2>🥛 Daily Milk Entry</h2>
 
-  <div class="form-box">
-    <label>Customer</label>
-    <select id="milkCustomer"></select>
+    <div class="grid">
+      <div>
+        <label>Customer</label>
+        <select id="milkCustomer"></select>
+      </div>
 
-    <label>Date</label>
-    <input type="date" id="milkDate">
+      <div>
+        <label>Date</label>
+        <input type="date" id="milkDate">
+      </div>
 
-    <label>Session</label>
-    <select id="milkSession">
-      <option value="Morning">Morning</option>
-      <option value="Evening">Evening</option>
-    </select>
+      <div>
+        <label>Session</label>
+        <select id="milkSession">
+          <option value="Morning">Morning</option>
+          <option value="Evening">Evening</option>
+        </select>
+      </div>
 
-    <label>Milk Quantity (0–20 Litres)</label>
-    <input type="number" id="milkQty" min="0" max="20" step="0.1"
-           placeholder="Example: 5.5" oninput="calculateAmount()">
+      <div>
+        <label>Milk Quantity (Litres)</label>
+        <input type="number" id="milkQty" min="0" max="20" step="0.01" placeholder="Litres">
+      </div>
 
-    <label>Rate Per Litre</label>
-    <input type="number" id="milkRate" min="0" step="0.01"
-           placeholder="Example: 40" oninput="calculateAmount()">
+      <div>
+        <label>Rate Per Litre</label>
+        <input type="number" id="milkRate" min="0" step="0.01" placeholder="Rate">
+      </div>
+    </div>
 
-    <p><b>Amount: ₹<span id="milkAmountPreview">0</span></b></p>
+    <div class="info">
+      Total Amount: ₹<b id="milkAmountPreview">0.00</b>
+    </div>
 
-    <button class="primary" onclick="addMilk()">💾 Save Milk</button>
+    <button class="btn" onclick="addMilk()">💾 Save Milk</button>
+
+    <div id="whatsappResult"></div>
   </div>
 
-  <div class="table-box">
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Customer</th>
-          <th>Village</th>
-          <th>Session</th>
-          <th>Litres</th>
-          <th>Rate</th>
-          <th>Amount</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="milkTable"></tbody>
-    </table>
+  <div class="card">
+    <h2>Milk Records</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Village</th>
+            <th>Session</th>
+            <th>Litres</th>
+            <th>Rate</th>
+            <th>Amount</th>
+            <th>WhatsApp</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="milkTable"></tbody>
+      </table>
+    </div>
   </div>
 </section>
 
 <!-- PAYMENTS -->
 <section id="payments" class="page">
-  <h2>💰 Payments Entry</h2>
+  <div class="card">
+    <h2>💰 Add Payment</h2>
 
-  <div class="form-box">
-    <label>Customer</label>
-    <select id="paymentCustomer"></select>
+    <div class="grid">
+      <div>
+        <label>Customer</label>
+        <select id="paymentCustomer"></select>
+      </div>
 
-    <label>Date</label>
-    <input type="date" id="paymentDate">
+      <div>
+        <label>Date</label>
+        <input type="date" id="paymentDate">
+      </div>
 
-    <label>Payment Amount</label>
-    <input type="number" id="paymentAmount" min="0" step="0.01"
-           placeholder="Enter amount">
+      <div>
+        <label>Payment Amount</label>
+        <input type="number" id="paymentAmount" min="0" step="0.01" placeholder="Amount">
+      </div>
+    </div>
 
-    <button class="primary" onclick="addPayment()">💾 Save Payment</button>
+    <button class="btn" onclick="addPayment()">💾 Save Payment</button>
   </div>
 
-  <div class="table-box">
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Customer</th>
-          <th>Village</th>
-          <th>Amount</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="paymentTable"></tbody>
-    </table>
+  <div class="card">
+    <h2>Payment Records</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Village</th>
+            <th>Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="paymentTable"></tbody>
+      </table>
+    </div>
   </div>
 </section>
 
 <!-- ALL RECORDS -->
 <section id="records" class="page">
-  <h2>📚 All Records</h2>
+  <div class="card">
+    <h2>📋 All Records Summary</h2>
 
-  <div class="card-grid">
-    <div class="card">
-      <h3>Total Milk</h3>
-      <strong id="recordMilk">0 L</strong>
-    </div>
+    <div class="summary">
+      <div class="summary-box">
+        <h3>Total Milk Litres</h3>
+        <p id="recordTotalMilk">0 L</p>
+      </div>
 
-    <div class="card">
-      <h3>Total Milk Amount</h3>
-      <strong id="recordMilkAmount">₹0</strong>
-    </div>
+      <div class="summary-box">
+        <h3>Total Milk Amount</h3>
+        <p id="recordTotalAmount">₹0</p>
+      </div>
 
-    <div class="card">
-      <h3>Total Payments</h3>
-      <strong id="recordPayments">₹0</strong>
-    </div>
+      <div class="summary-box">
+        <h3>Total Payments</h3>
+        <p id="recordTotalPayments">₹0</p>
+      </div>
 
-    <div class="card">
-      <h3>Balance</h3>
-      <strong id="recordBalance">₹0</strong>
+      <div class="summary-box">
+        <h3>Outstanding</h3>
+        <p id="recordBalance">₹0</p>
+      </div>
     </div>
   </div>
 
-  <h3 class="section-title">Date-wise Milk History</h3>
-  <div class="table-box">
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Customer</th>
-          <th>Village</th>
-          <th>Session</th>
-          <th>Litres</th>
-          <th>Amount</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody id="allMilkTable"></tbody>
-    </table>
+  <div class="card">
+    <h2>All Milk History</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Village</th>
+            <th>Session</th>
+            <th>Litres</th>
+            <th>Rate</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody id="allMilkTable"></tbody>
+      </table>
+    </div>
   </div>
 
-  <h3 class="section-title">Payment History</h3>
-  <div class="table-box">
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Customer</th>
-          <th>Village</th>
-          <th>Amount</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody id="allPaymentTable"></tbody>
-    </table>
+  <div class="card">
+    <h2>All Payment History</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Village</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody id="allPaymentTable"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOMER PAYMENT CHECK -->
+<section id="statement" class="page">
+  <div class="card">
+    <h2>👤 Customer Payment Check</h2>
+
+    <label>Select Customer</label>
+    <select id="statementCustomer" onchange="renderStatement()">
+      <option value="">-- Select Customer --</option>
+    </select>
+
+    <div id="statementCustomerInfo"></div>
+
+    <div class="summary">
+      <div class="summary-box">
+        <h3>Total Milk</h3>
+        <p id="statementMilk">0 L</p>
+      </div>
+
+      <div class="summary-box">
+        <h3>Milk Amount</h3>
+        <p id="statementMilkAmount">₹0</p>
+      </div>
+
+      <div class="summary-box">
+        <h3>Total Payment</h3>
+        <p id="statementPayments">₹0</p>
+      </div>
+
+      <div class="summary-box">
+        <h3>Remaining Balance</h3>
+        <p id="statementBalance">₹0</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🥛 Customer Milk History</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Session</th>
+            <th>Litres</th>
+            <th>Rate</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody id="statementMilkTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>💰 Customer Payment History</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Payment Amount</th>
+          </tr>
+        </thead>
+        <tbody id="statementPaymentTable"></tbody>
+      </table>
+    </div>
   </div>
 </section>
 
@@ -409,77 +600,124 @@ let customers = JSON.parse(localStorage.getItem("customers") || "[]");
 let milk = JSON.parse(localStorage.getItem("milk") || "[]");
 let payments = JSON.parse(localStorage.getItem("payments") || "[]");
 
-function todayStr(){
-  let d = new Date();
-  let month = String(d.getMonth()+1).padStart(2,"0");
-  let day = String(d.getDate()).padStart(2,"0");
-  return d.getFullYear()+"-"+month+"-"+day;
-}
-
-function dateLimits(){
-  let d = new Date();
-
-  let minDate = new Date();
-  minDate.setMonth(minDate.getMonth()-1);
-
-  let maxDate = new Date();
-  maxDate.setFullYear(maxDate.getFullYear()+1);
-
-  let format = x => {
-    let m=String(x.getMonth()+1).padStart(2,"0");
-    let day=String(x.getDate()).padStart(2,"0");
-    return x.getFullYear()+"-"+m+"-"+day;
-  };
-
-  ["milkDate","paymentDate"].forEach(id=>{
-    let el=document.getElementById(id);
-    el.min=format(minDate);
-    el.max=format(maxDate);
-    el.value=todayStr();
-  });
-}
-
 function saveData(){
-  localStorage.setItem("customers",JSON.stringify(customers));
-  localStorage.setItem("milk",JSON.stringify(milk));
-  localStorage.setItem("payments",JSON.stringify(payments));
+  localStorage.setItem("customers", JSON.stringify(customers));
+  localStorage.setItem("milk", JSON.stringify(milk));
+  localStorage.setItem("payments", JSON.stringify(payments));
 }
 
-function showPage(page){
-  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
-  document.getElementById(page).classList.add("active");
-  render();
+function todayDate(){
+  return new Date().toISOString().split("T")[0];
 }
 
-function customerById(id){
-  return customers.find(c=>String(c.id)===String(id));
+function money(value){
+  return "₹" + Number(value || 0).toFixed(2);
+}
+
+function getCustomer(id){
+  return customers.find(c => String(c.id) === String(id));
 }
 
 function customerName(id){
-  let c=customerById(id);
+  const c = getCustomer(id);
   return c ? c.name : "Unknown";
 }
 
 function customerVillage(id){
-  let c=customerById(id);
+  const c = getCustomer(id);
   return c ? c.village : "-";
 }
 
-function addCustomer(){
-  let name=document.getElementById("customerName").value.trim();
-  let village=document.getElementById("customerVillage").value.trim();
-  let phone=document.getElementById("customerPhone").value.trim();
+function normalizePhone(phone){
+  let number = String(phone || "").replace(/\D/g,"");
 
-  if(!name){
-    alert("Customer name enter karein");
+  if(number.length === 10){
+    number = "91" + number;
+  }
+
+  if(number.startsWith("0") && number.length === 11){
+    number = "91" + number.substring(1);
+  }
+
+  return number;
+}
+
+function openWhatsApp(phone,message){
+  const number = normalizePhone(phone);
+
+  if(!number || number.length < 12){
+    alert("Customer ka valid WhatsApp mobile number saved nahi hai.");
     return;
   }
 
-  let code="C"+String(customers.length+1).padStart(3,"0");
+  const url =
+    "https://wa.me/" +
+    number +
+    "?text=" +
+    encodeURIComponent(message);
+
+  window.open(url, "_blank");
+}
+
+function milkWhatsAppMessage(record){
+  const c = getCustomer(record.customerId);
+
+  return `Assalamualaikum ${c ? c.name : ""},
+
+Dairy Milk Record
+
+Date: ${record.date}
+Session: ${record.session}
+Milk: ${record.qty} Litres
+Rate: ₹${record.rate} per litre
+Total Amount: ₹${Number(record.amount).toFixed(2)}
+
+Thank you.`;
+}
+
+function sendMilkWhatsAppById(id){
+  const record = milk.find(x => String(x.id) === String(id));
+
+  if(!record){
+    alert("Milk record nahi mila.");
+    return;
+  }
+
+  const c = getCustomer(record.customerId);
+
+  if(!c || !c.phone){
+    alert("Is customer ka WhatsApp number saved nahi hai.");
+    return;
+  }
+
+  openWhatsApp(c.phone, milkWhatsAppMessage(record));
+}
+
+function showPage(pageId){
+  document.querySelectorAll(".page").forEach(p => {
+    p.classList.remove("active");
+  });
+
+  document.getElementById(pageId).classList.add("active");
+
+  render();
+}
+
+function addCustomer(){
+  const name = document.getElementById("customerName").value.trim();
+  const village = document.getElementById("customerVillage").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
+
+  if(!name){
+    alert("Customer name enter karein.");
+    return;
+  }
+
+  const id = Date.now();
 
   customers.push({
-    id:Date.now(),
-    code:code,
+    id:id,
+    code:"C" + String(customers.length + 1).padStart(3,"0"),
     name:name,
     village:village || "-",
     phone:phone || "-"
@@ -487,100 +725,123 @@ function addCustomer(){
 
   saveData();
 
-  document.getElementById("customerName").value="";
-  document.getElementById("customerVillage").value="";
-  document.getElementById("customerPhone").value="";
+  document.getElementById("customerName").value = "";
+  document.getElementById("customerVillage").value = "";
+  document.getElementById("customerPhone").value = "";
 
-  alert("Customer successfully added");
+  alert("Customer saved successfully.");
   render();
 }
 
 function deleteCustomer(id){
-  if(!confirm("Customer delete karna hai?")) return;
+  if(!confirm("Customer delete karna hai?")){
+    return;
+  }
 
-  customers=customers.filter(c=>String(c.id)!==String(id));
+  customers = customers.filter(c => String(c.id) !== String(id));
   saveData();
   render();
 }
 
-function fillCustomerDropdowns(){
-  let options='<option value="">Select Customer</option>';
-
-  customers.forEach(c=>{
-    options += `<option value="${c.id}">
-      ${c.code} - ${c.name} (${c.village})
-    </option>`;
-  });
-
-  document.getElementById("milkCustomer").innerHTML=options;
-  document.getElementById("paymentCustomer").innerHTML=options;
-}
-
-function calculateAmount(){
-  let qty=Number(document.getElementById("milkQty").value)||0;
-  let rate=Number(document.getElementById("milkRate").value)||0;
-  document.getElementById("milkAmountPreview").innerText=(qty*rate).toFixed(2);
-}
-
 function addMilk(){
-  let customerId=document.getElementById("milkCustomer").value;
-  let date=document.getElementById("milkDate").value;
-  let session=document.getElementById("milkSession").value;
-  let qty=Number(document.getElementById("milkQty").value);
-  let rate=Number(document.getElementById("milkRate").value);
+  const customerId = document.getElementById("milkCustomer").value;
+  const date = document.getElementById("milkDate").value;
+  const session = document.getElementById("milkSession").value;
+  const qty = Number(document.getElementById("milkQty").value);
+  const rate = Number(document.getElementById("milkRate").value);
 
-  if(!customerId || !date){
-    alert("Customer aur date select karein");
+  if(!customerId){
+    alert("Customer select karein.");
     return;
   }
 
-  if(isNaN(qty) || qty<0 || qty>20){
-    alert("Milk quantity 0 se 20 litres ke beech honi chahiye");
+  if(!date){
+    alert("Date select karein.");
     return;
   }
 
-  if(isNaN(rate) || rate<0){
-    alert("Valid rate enter karein");
+  if(!qty || qty <= 0){
+    alert("Milk quantity enter karein.");
     return;
   }
 
-  milk.push({
-    id:Date.now()+Math.random(),
+  if(!rate || rate <= 0){
+    alert("Rate enter karein.");
+    return;
+  }
+
+  const record = {
+    id:Date.now() + Math.random(),
     customerId:customerId,
     date:date,
     session:session,
     qty:qty,
     rate:rate,
-    amount:qty*rate
-  });
+    amount:qty * rate
+  };
 
+  milk.push(record);
   saveData();
 
-  document.getElementById("milkQty").value="";
-  document.getElementById("milkRate").value="";
-  document.getElementById("milkAmountPreview").innerText="0";
+  document.getElementById("milkQty").value = "";
+  document.getElementById("milkRate").value = "";
 
-  alert("Milk saved successfully");
+  document.getElementById("whatsappResult").innerHTML = `
+    <div class="success">
+      Milk saved successfully.<br><br>
+      <button class="btn-whatsapp"
+        onclick="sendMilkWhatsAppById('${record.id}')">
+        📲 Send WhatsApp to Customer
+      </button>
+    </div>
+  `;
+
+  render();
+}
+
+function deleteMilk(id){
+  const record = milk.find(x => String(x.id) === String(id));
+
+  if(!record){
+    return;
+  }
+
+  if(record.date !== todayDate()){
+    alert("Purane date ka record delete nahi kar sakte.");
+    return;
+  }
+
+  if(!confirm("Aaj ka milk record delete karna hai?")){
+    return;
+  }
+
+  milk = milk.filter(x => String(x.id) !== String(id));
+  saveData();
   render();
 }
 
 function addPayment(){
-  let customerId=document.getElementById("paymentCustomer").value;
-  let date=document.getElementById("paymentDate").value;
-  let amount=Number(document.getElementById("paymentAmount").value);
+  const customerId = document.getElementById("paymentCustomer").value;
+  const date = document.getElementById("paymentDate").value;
+  const amount = Number(document.getElementById("paymentAmount").value);
 
-  if(!customerId || !date){
-    alert("Customer aur date select karein");
+  if(!customerId){
+    alert("Customer select karein.");
     return;
   }
 
-  if(isNaN(amount) || amount<0){
-    alert("Valid payment amount enter karein");
+  if(!date){
+    alert("Date select karein.");
+    return;
+  }
+
+  if(!amount || amount <= 0){
+    alert("Payment amount enter karein.");
     return;
   }
 
   payments.push({
-    id:Date.now()+Math.random(),
+    id:Date.now() + Math.random(),
     customerId:customerId,
     date:date,
     amount:amount
@@ -588,222 +849,357 @@ function addPayment(){
 
   saveData();
 
-  document.getElementById("paymentAmount").value="";
+  document.getElementById("paymentAmount").value = "";
 
-  alert("Payment saved successfully");
-  render();
-}
-
-function deleteMilk(id){
-  let item=milk.find(x=>String(x.id)===String(id));
-
-  if(!item) return;
-
-  if(item.date!==todayStr()){
-    alert("Purane ya future date ka data delete nahi kar sakte");
-    return;
-  }
-
-  if(!confirm("Aaj ka milk record delete karna hai?")) return;
-
-  milk=milk.filter(x=>String(x.id)!==String(id));
-  saveData();
+  alert("Payment saved successfully.");
   render();
 }
 
 function deletePayment(id){
-  let item=payments.find(x=>String(x.id)===String(id));
+  const record = payments.find(x => String(x.id) === String(id));
 
-  if(!item) return;
-
-  if(item.date!==todayStr()){
-    alert("Purane ya future date ka payment delete nahi kar sakte");
+  if(!record){
     return;
   }
 
-  if(!confirm("Aaj ka payment delete karna hai?")) return;
+  if(record.date !== todayDate()){
+    alert("Purane date ka payment delete nahi kar sakte.");
+    return;
+  }
 
-  payments=payments.filter(x=>String(x.id)!==String(id));
+  if(!confirm("Aaj ka payment delete karna hai?")){
+    return;
+  }
+
+  payments = payments.filter(x => String(x.id) !== String(id));
   saveData();
   render();
 }
 
-function actionForDate(date,type,id){
-  if(date===todayStr()){
-    if(type==="milk"){
-      return `<button class="danger" onclick="deleteMilk('${id}')">Delete</button>`;
-    }else{
-      return `<button class="danger" onclick="deletePayment('${id}')">Delete</button>`;
-    }
-  }
+function fillCustomerDropdowns(){
+  const milkSelect = document.getElementById("milkCustomer");
+  const paymentSelect = document.getElementById("paymentCustomer");
+  const statementSelect = document.getElementById("statementCustomer");
 
-  return `<span class="locked">🔒 Locked</span>`;
+  const oldMilk = milkSelect.value;
+  const oldPayment = paymentSelect.value;
+  const oldStatement = statementSelect.value;
+
+  milkSelect.innerHTML = '<option value="">-- Select Customer --</option>';
+  paymentSelect.innerHTML = '<option value="">-- Select Customer --</option>';
+  statementSelect.innerHTML = '<option value="">-- Select Customer --</option>';
+
+  customers.forEach(c => {
+    const text = `${c.code} - ${c.name} (${c.village})`;
+
+    milkSelect.innerHTML += `<option value="${c.id}">${text}</option>`;
+    paymentSelect.innerHTML += `<option value="${c.id}">${text}</option>`;
+    statementSelect.innerHTML += `<option value="${c.id}">${text}</option>`;
+  });
+
+  milkSelect.value = oldMilk;
+  paymentSelect.value = oldPayment;
+  statementSelect.value = oldStatement;
 }
 
 function renderCustomers(){
-  let html="";
+  const tbody = document.getElementById("customerTable");
+  tbody.innerHTML = "";
 
-  customers.forEach(c=>{
-    html += `
+  customers.forEach(c => {
+    tbody.innerHTML += `
       <tr>
         <td>${c.code}</td>
         <td>${c.name}</td>
         <td>${c.village}</td>
         <td>${c.phone}</td>
         <td>
-          <button class="danger" onclick="deleteCustomer('${c.id}')">
+          <button class="btn-danger btn-small"
+            onclick="deleteCustomer('${c.id}')">
             Delete
           </button>
         </td>
       </tr>
     `;
   });
-
-  document.getElementById("customerTable").innerHTML=
-    html || `<tr><td colspan="5">No customers added</td></tr>`;
 }
 
 function renderMilk(){
-  let html="";
+  const tbody = document.getElementById("milkTable");
+  tbody.innerHTML = "";
 
-  [...milk].reverse().forEach(x=>{
-    html += `
+  const sorted = [...milk].sort((a,b) =>
+    b.date.localeCompare(a.date)
+  );
+
+  sorted.forEach(r => {
+    const c = getCustomer(r.customerId);
+    const phone = c ? c.phone : "";
+
+    tbody.innerHTML += `
       <tr>
-        <td>${x.date}</td>
-        <td>${customerName(x.customerId)}</td>
-        <td>${customerVillage(x.customerId)}</td>
-        <td>${x.session}</td>
-        <td>${Number(x.qty).toFixed(2)} L</td>
-        <td>₹${Number(x.rate).toFixed(2)}</td>
-        <td>₹${Number(x.amount).toFixed(2)}</td>
-        <td>${actionForDate(x.date,"milk",x.id)}</td>
+        <td>${r.date}</td>
+        <td>${customerName(r.customerId)}</td>
+        <td>${customerVillage(r.customerId)}</td>
+        <td>${r.session}</td>
+        <td>${r.qty}</td>
+        <td>${money(r.rate)}</td>
+        <td>${money(r.amount)}</td>
+        <td>
+          <button class="btn-whatsapp btn-small"
+            onclick="sendMilkWhatsAppById('${r.id}')">
+            WhatsApp
+          </button>
+        </td>
+        <td>
+          ${
+            r.date === todayDate()
+            ?
+            `<button class="btn-danger btn-small"
+              onclick="deleteMilk('${r.id}')">
+              Delete
+            </button>`
+            :
+            `<span>🔒 Locked</span>`
+          }
+        </td>
       </tr>
     `;
   });
-
-  document.getElementById("milkTable").innerHTML=
-    html || `<tr><td colspan="8">No milk records</td></tr>`;
 }
 
 function renderPayments(){
-  let html="";
+  const tbody = document.getElementById("paymentTable");
+  tbody.innerHTML = "";
 
-  [...payments].reverse().forEach(x=>{
-    html += `
+  const sorted = [...payments].sort((a,b) =>
+    b.date.localeCompare(a.date)
+  );
+
+  sorted.forEach(r => {
+    tbody.innerHTML += `
       <tr>
-        <td>${x.date}</td>
-        <td>${customerName(x.customerId)}</td>
-        <td>${customerVillage(x.customerId)}</td>
-        <td>₹${Number(x.amount).toFixed(2)}</td>
-        <td>${actionForDate(x.date,"payment",x.id)}</td>
-      </tr>
-    `;
-  });
-
-  document.getElementById("paymentTable").innerHTML=
-    html || `<tr><td colspan="5">No payment records</td></tr>`;
-}
-
-function renderAllRecords(){
-  let allMilkQty=milk.reduce((s,x)=>s+Number(x.qty||0),0);
-  let allMilkAmount=milk.reduce((s,x)=>s+Number(x.amount||0),0);
-  let allPaymentAmount=payments.reduce((s,x)=>s+Number(x.amount||0),0);
-  let balance=allMilkAmount-allPaymentAmount;
-
-  document.getElementById("recordMilk").innerText=
-    allMilkQty.toFixed(2)+" L";
-
-  document.getElementById("recordMilkAmount").innerText=
-    "₹"+allMilkAmount.toFixed(2);
-
-  document.getElementById("recordPayments").innerText=
-    "₹"+allPaymentAmount.toFixed(2);
-
-  document.getElementById("recordBalance").innerText=
-    "₹"+balance.toFixed(2);
-
-  let milkHtml="";
-
-  [...milk].reverse().forEach(x=>{
-    milkHtml += `
-      <tr>
-        <td>${x.date}</td>
-        <td>${customerName(x.customerId)}</td>
-        <td>${customerVillage(x.customerId)}</td>
-        <td>${x.session}</td>
-        <td>${Number(x.qty).toFixed(2)} L</td>
-        <td>₹${Number(x.amount).toFixed(2)}</td>
+        <td>${r.date}</td>
+        <td>${customerName(r.customerId)}</td>
+        <td>${customerVillage(r.customerId)}</td>
+        <td>${money(r.amount)}</td>
         <td>
-          ${x.date===todayStr()
-            ? "🟢 Today - Delete Allowed"
-            : "🔒 Previous Date Locked"}
+          ${
+            r.date === todayDate()
+            ?
+            `<button class="btn-danger btn-small"
+              onclick="deletePayment('${r.id}')">
+              Delete
+            </button>`
+            :
+            `<span>🔒 Locked</span>`
+          }
         </td>
       </tr>
     `;
   });
-
-  document.getElementById("allMilkTable").innerHTML=
-    milkHtml || `<tr><td colspan="7">No milk history</td></tr>`;
-
-  let paymentHtml="";
-
-  [...payments].reverse().forEach(x=>{
-    paymentHtml += `
-      <tr>
-        <td>${x.date}</td>
-        <td>${customerName(x.customerId)}</td>
-        <td>${customerVillage(x.customerId)}</td>
-        <td>₹${Number(x.amount).toFixed(2)}</td>
-        <td>
-          ${x.date===todayStr()
-            ? "🟢 Today - Delete Allowed"
-            : "🔒 Previous Date Locked"}
-        </td>
-      </tr>
-    `;
-  });
-
-  document.getElementById("allPaymentTable").innerHTML=
-    paymentHtml || `<tr><td colspan="5">No payment history</td></tr>`;
 }
 
 function renderDashboard(){
-  let today=todayStr();
+  const today = todayDate();
 
-  let todayMilkData=milk.filter(x=>x.date===today);
-  let todayPaymentData=payments.filter(x=>x.date===today);
+  const todayMilk = milk
+    .filter(x => x.date === today)
+    .reduce((sum,x) => sum + Number(x.qty || 0),0);
 
-  let todayQty=todayMilkData.reduce((s,x)=>s+Number(x.qty||0),0);
-  let todayAmount=todayMilkData.reduce((s,x)=>s+Number(x.amount||0),0);
-  let todayPayment=todayPaymentData.reduce((s,x)=>s+Number(x.amount||0),0);
+  const todayAmount = milk
+    .filter(x => x.date === today)
+    .reduce((sum,x) => sum + Number(x.amount || 0),0);
 
-  let allQty=milk.reduce((s,x)=>s+Number(x.qty||0),0);
-  let allAmount=milk.reduce((s,x)=>s+Number(x.amount||0),0);
-  let allPayments=payments.reduce((s,x)=>s+Number(x.amount||0),0);
+  const totalMilk = milk
+    .reduce((sum,x) => sum + Number(x.qty || 0),0);
 
-  document.getElementById("todayMilk").innerText=
-    todayQty.toFixed(2)+" L";
+  const totalAmount = milk
+    .reduce((sum,x) => sum + Number(x.amount || 0),0);
 
-  document.getElementById("todayMilkAmount").innerText=
-    "₹"+todayAmount.toFixed(2);
+  const totalPayments = payments
+    .reduce((sum,x) => sum + Number(x.amount || 0),0);
 
-  document.getElementById("todayPayments").innerText=
-    "₹"+todayPayment.toFixed(2);
+  const balance = totalAmount - totalPayments;
 
-  document.getElementById("totalCustomers").innerText=
-    customers.length;
+  document.getElementById("dashCustomers").textContent = customers.length;
+  document.getElementById("dashTodayMilk").textContent = todayMilk.toFixed(2) + " L";
+  document.getElementById("dashTodayAmount").textContent = money(todayAmount);
+  document.getElementById("dashTotalMilk").textContent = totalMilk.toFixed(2) + " L";
+  document.getElementById("dashTotalAmount").textContent = money(totalAmount);
+  document.getElementById("dashPayments").textContent = money(totalPayments);
+  document.getElementById("dashBalance").textContent = money(balance);
+}
 
-  document.getElementById("allMilk").innerText=
-    allQty.toFixed(2)+" L";
+function renderAllRecords(){
+  const totalMilk = milk.reduce((sum,x) => sum + Number(x.qty || 0),0);
+  const totalAmount = milk.reduce((sum,x) => sum + Number(x.amount || 0),0);
+  const totalPayments = payments.reduce((sum,x) => sum + Number(x.amount || 0),0);
+  const balance = totalAmount - totalPayments;
 
-  document.getElementById("allMilkAmount").innerText=
-    "₹"+allAmount.toFixed(2);
+  document.getElementById("recordTotalMilk").textContent =
+    totalMilk.toFixed(2) + " L";
 
-  document.getElementById("allPayments").innerText=
-    "₹"+allPayments.toFixed(2);
+  document.getElementById("recordTotalAmount").textContent =
+    money(totalAmount);
 
-  document.getElementById("balance").innerText=
-    "₹"+(allAmount-allPayments).toFixed(2);
+  document.getElementById("recordTotalPayments").textContent =
+    money(totalPayments);
+
+  document.getElementById("recordBalance").textContent =
+    money(balance);
+
+  const milkBody = document.getElementById("allMilkTable");
+  milkBody.innerHTML = "";
+
+  [...milk]
+    .sort((a,b) => b.date.localeCompare(a.date))
+    .forEach(r => {
+      milkBody.innerHTML += `
+        <tr>
+          <td>${r.date}</td>
+          <td>${customerName(r.customerId)}</td>
+          <td>${customerVillage(r.customerId)}</td>
+          <td>${r.session}</td>
+          <td>${r.qty}</td>
+          <td>${money(r.rate)}</td>
+          <td>${money(r.amount)}</td>
+        </tr>
+      `;
+    });
+
+  const paymentBody = document.getElementById("allPaymentTable");
+  paymentBody.innerHTML = "";
+
+  [...payments]
+    .sort((a,b) => b.date.localeCompare(a.date))
+    .forEach(r => {
+      paymentBody.innerHTML += `
+        <tr>
+          <td>${r.date}</td>
+          <td>${customerName(r.customerId)}</td>
+          <td>${customerVillage(r.customerId)}</td>
+          <td>${money(r.amount)}</td>
+        </tr>
+      `;
+    });
+}
+
+function renderStatement(){
+  const customerId = document.getElementById("statementCustomer").value;
+
+  const info = document.getElementById("statementCustomerInfo");
+  const milkBody = document.getElementById("statementMilkTable");
+  const paymentBody = document.getElementById("statementPaymentTable");
+
+  milkBody.innerHTML = "";
+  paymentBody.innerHTML = "";
+
+  if(!customerId){
+    info.innerHTML = "";
+    document.getElementById("statementMilk").textContent = "0 L";
+    document.getElementById("statementMilkAmount").textContent = "₹0";
+    document.getElementById("statementPayments").textContent = "₹0";
+    document.getElementById("statementBalance").textContent = "₹0";
+    return;
+  }
+
+  const c = getCustomer(customerId);
+
+  const customerMilk = milk.filter(x =>
+    String(x.customerId) === String(customerId)
+  );
+
+  const customerPayments = payments.filter(x =>
+    String(x.customerId) === String(customerId)
+  );
+
+  const totalLitres = customerMilk.reduce((sum,x) =>
+    sum + Number(x.qty || 0),0
+  );
+
+  const totalMilkAmount = customerMilk.reduce((sum,x) =>
+    sum + Number(x.amount || 0),0
+  );
+
+  const totalPaid = customerPayments.reduce((sum,x) =>
+    sum + Number(x.amount || 0),0
+  );
+
+  const balance = totalMilkAmount - totalPaid;
+
+  info.innerHTML = `
+    <div class="info">
+      <b>Customer:</b> ${c.name}<br>
+      <b>Village:</b> ${c.village}<br>
+      <b>WhatsApp:</b> ${c.phone}
+    </div>
+  `;
+
+  document.getElementById("statementMilk").textContent =
+    totalLitres.toFixed(2) + " L";
+
+  document.getElementById("statementMilkAmount").textContent =
+    money(totalMilkAmount);
+
+  document.getElementById("statementPayments").textContent =
+    money(totalPaid);
+
+  document.getElementById("statementBalance").textContent =
+    money(balance);
+
+  [...customerMilk]
+    .sort((a,b) => b.date.localeCompare(a.date))
+    .forEach(r => {
+      milkBody.innerHTML += `
+        <tr>
+          <td>${r.date}</td>
+          <td>${r.session}</td>
+          <td>${r.qty}</td>
+          <td>${money(r.rate)}</td>
+          <td>${money(r.amount)}</td>
+        </tr>
+      `;
+    });
+
+  [...customerPayments]
+    .sort((a,b) => b.date.localeCompare(a.date))
+    .forEach(r => {
+      paymentBody.innerHTML += `
+        <tr>
+          <td>${r.date}</td>
+          <td>${money(r.amount)}</td>
+        </tr>
+      `;
+    });
+}
+
+function updateMilkPreview(){
+  const qty = Number(document.getElementById("milkQty").value || 0);
+  const rate = Number(document.getElementById("milkRate").value || 0);
+
+  document.getElementById("milkAmountPreview").textContent =
+    (qty * rate).toFixed(2);
+}
+
+function setDateLimits(){
+  const today = new Date();
+
+  const past = new Date();
+  past.setMonth(past.getMonth() - 1);
+
+  const future = new Date();
+  future.setFullYear(future.getFullYear() + 1);
+
+  const formatDate = d => d.toISOString().split("T")[0];
+
+  document.getElementById("milkDate").min = formatDate(past);
+  document.getElementById("milkDate").max = formatDate(future);
+  document.getElementById("paymentDate").min = formatDate(past);
+  document.getElementById("paymentDate").max = formatDate(future);
+
+  document.getElementById("milkDate").value = todayDate();
+  document.getElementById("paymentDate").value = todayDate();
 }
 
 function render(){
@@ -813,9 +1209,18 @@ function render(){
   renderPayments();
   renderDashboard();
   renderAllRecords();
+  renderStatement();
 }
 
-dateLimits();
+document.getElementById("milkQty").addEventListener(
+  "input", updateMilkPreview
+);
+
+document.getElementById("milkRate").addEventListener(
+  "input", updateMilkPreview
+);
+
+setDateLimits();
 render();
 </script>
 
