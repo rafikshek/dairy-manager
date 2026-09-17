@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dairy Manager</title>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
   background:#f4f7fb;
   color:#222;
 }
@@ -45,23 +45,14 @@ nav button{
   cursor:pointer;
 }
 
-nav button:hover{
-  background:#b7ead5;
-}
-
 .container{
   max-width:1200px;
   margin:auto;
   padding:15px;
 }
 
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
+.page{display:none}
+.page.active{display:block}
 
 .card{
   background:white;
@@ -109,11 +100,6 @@ button{
   color:white;
 }
 
-.btn-blue{
-  background:#1971c2;
-  color:white;
-}
-
 .btn-whatsapp{
   background:#25D366;
   color:white;
@@ -123,6 +109,32 @@ button{
   padding:6px 9px;
   font-size:12px;
   margin:2px;
+}
+
+.summary{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:12px;
+}
+
+.summary-box{
+  background:white;
+  padding:18px;
+  border-radius:10px;
+  box-shadow:0 2px 8px #ddd;
+  text-align:center;
+}
+
+.summary-box h3{
+  margin:0;
+  color:#087f5b;
+  font-size:14px;
+}
+
+.summary-box p{
+  font-size:21px;
+  font-weight:bold;
+  margin:10px 0 0;
 }
 
 table{
@@ -153,32 +165,6 @@ tr:nth-child(even){
   background:#f8f9fa;
 }
 
-.summary{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-  gap:12px;
-}
-
-.summary-box{
-  background:white;
-  padding:18px;
-  border-radius:10px;
-  box-shadow:0 2px 8px #ddd;
-  text-align:center;
-}
-
-.summary-box h3{
-  margin:0;
-  color:#087f5b;
-  font-size:14px;
-}
-
-.summary-box p{
-  font-size:22px;
-  font-weight:bold;
-  margin:10px 0 0;
-}
-
 .success{
   background:#d3f9d8;
   color:#176b2c;
@@ -195,14 +181,6 @@ tr:nth-child(even){
   margin-top:10px;
 }
 
-.danger-box{
-  background:#ffe3e3;
-  color:#a51111;
-  padding:12px;
-  border-radius:7px;
-  margin-top:10px;
-}
-
 .info{
   background:#e7f5ff;
   padding:12px;
@@ -210,26 +188,12 @@ tr:nth-child(even){
   margin:10px 0;
 }
 
-.balance-positive{
-  color:#d62828;
-  font-weight:bold;
-}
-
-.balance-zero{
-  color:#087f5b;
-  font-weight:bold;
-}
-
 @media(max-width:600px){
-  header{
-    font-size:20px;
-  }
-
+  header{font-size:20px}
   nav button{
     font-size:12px;
     padding:9px;
   }
-
   th,td{
     font-size:12px;
     padding:7px;
@@ -249,6 +213,7 @@ tr:nth-child(even){
   <button onclick="showPage('payments')">💰 Payments</button>
   <button onclick="showPage('records')">📋 All Records</button>
   <button onclick="showPage('statement')">👤 Payment Check</button>
+  <button onclick="showPage('dealerPDF')">📄 Dealer PDF</button>
 </nav>
 
 <div class="container">
@@ -257,6 +222,7 @@ tr:nth-child(even){
 <section id="dashboard" class="page active">
   <div class="card">
     <h2>📊 Dashboard</h2>
+
     <div class="summary">
       <div class="summary-box">
         <h3>Total Customers</h3>
@@ -318,7 +284,9 @@ tr:nth-child(even){
       </div>
     </div>
 
-    <button class="btn" onclick="addCustomer()">➕ Save Customer</button>
+    <button class="btn" onclick="addCustomer()">
+      ➕ Save Customer
+    </button>
   </div>
 
   <div class="card">
@@ -366,21 +334,24 @@ tr:nth-child(even){
       </div>
 
       <div>
-        <label>Milk Quantity (Litres)</label>
-        <input type="number" id="milkQty" min="0" max="20" step="0.01" placeholder="Litres">
+        <label>Milk Quantity Litres</label>
+        <input type="number" id="milkQty" min="0" max="20" step="0.01">
       </div>
 
       <div>
-        <label>Rate Per Litre</label>
-        <input type="number" id="milkRate" min="0" step="0.01" placeholder="Rate">
+        <label>Customer Rate Per Litre</label>
+        <input type="number" id="milkRate" min="0" step="0.01">
       </div>
     </div>
 
     <div class="info">
-      Total Amount: ₹<b id="milkAmountPreview">0.00</b>
+      Total Customer Amount:
+      ₹<b id="milkAmountPreview">0.00</b>
     </div>
 
-    <button class="btn" onclick="addMilk()">💾 Save Milk</button>
+    <button class="btn" onclick="addMilk()">
+      💾 Save Milk
+    </button>
 
     <div id="whatsappResult"></div>
   </div>
@@ -427,11 +398,13 @@ tr:nth-child(even){
 
       <div>
         <label>Payment Amount</label>
-        <input type="number" id="paymentAmount" min="0" step="0.01" placeholder="Amount">
+        <input type="number" id="paymentAmount" min="0" step="0.01">
       </div>
     </div>
 
-    <button class="btn" onclick="addPayment()">💾 Save Payment</button>
+    <button class="btn" onclick="addPayment()">
+      💾 Save Payment
+    </button>
   </div>
 
   <div class="card">
@@ -461,7 +434,7 @@ tr:nth-child(even){
 
     <div class="summary">
       <div class="summary-box">
-        <h3>Total Milk Litres</h3>
+        <h3>Total Milk</h3>
         <p id="recordTotalMilk">0 L</p>
       </div>
 
@@ -593,12 +566,56 @@ tr:nth-child(even){
   </div>
 </section>
 
+<!-- DEALER PDF -->
+<section id="dealerPDF" class="page">
+  <div class="card">
+    <h2>📄 Dealer PDF Statement</h2>
+
+    <label>Dealer Name</label>
+    <input
+      type="text"
+      id="dealerName"
+      placeholder="Dealer name"
+    >
+
+    <label>Dealer Code</label>
+    <input
+      type="text"
+      id="dealerCode"
+      placeholder="Dealer code"
+    >
+
+    <label>Collection Date</label>
+    <input type="date" id="dealerDate">
+
+    <label>Collection Time</label>
+    <input type="time" id="dealerTime">
+
+    <button class="btn" onclick="generateDealerPDF()">
+      📥 Download Dealer PDF
+    </button>
+
+    <div class="warning">
+      Dealer PDF mein customer ka asli rate, FAT, SNF aur profit
+      show nahi hoga. Dealer rate automatic customer rate + ₹2.50 hoga.
+    </div>
+  </div>
+</section>
+
 </div>
 
 <script>
-let customers = JSON.parse(localStorage.getItem("customers") || "[]");
-let milk = JSON.parse(localStorage.getItem("milk") || "[]");
-let payments = JSON.parse(localStorage.getItem("payments") || "[]");
+let customers = JSON.parse(
+  localStorage.getItem("customers") || "[]"
+);
+
+let milk = JSON.parse(
+  localStorage.getItem("milk") || "[]"
+);
+
+let payments = JSON.parse(
+  localStorage.getItem("payments") || "[]"
+);
 
 function saveData(){
   localStorage.setItem("customers", JSON.stringify(customers));
@@ -615,7 +632,9 @@ function money(value){
 }
 
 function getCustomer(id){
-  return customers.find(c => String(c.id) === String(id));
+  return customers.find(c =>
+    String(c.id) === String(id)
+  );
 }
 
 function customerName(id){
@@ -646,7 +665,7 @@ function openWhatsApp(phone,message){
   const number = normalizePhone(phone);
 
   if(!number || number.length < 12){
-    alert("Customer ka valid WhatsApp mobile number saved nahi hai.");
+    alert("Valid WhatsApp number saved nahi hai.");
     return;
   }
 
@@ -656,7 +675,7 @@ function openWhatsApp(phone,message){
     "?text=" +
     encodeURIComponent(message);
 
-  window.open(url, "_blank");
+  window.open(url,"_blank");
 }
 
 function milkWhatsAppMessage(record){
@@ -664,7 +683,7 @@ function milkWhatsAppMessage(record){
 
   return `Assalamualaikum ${c ? c.name : ""},
 
-Dairy Milk Record
+Milk Collection Details
 
 Date: ${record.date}
 Session: ${record.session}
@@ -676,7 +695,9 @@ Thank you.`;
 }
 
 function sendMilkWhatsAppById(id){
-  const record = milk.find(x => String(x.id) === String(id));
+  const record = milk.find(x =>
+    String(x.id) === String(id)
+  );
 
   if(!record){
     alert("Milk record nahi mila.");
@@ -685,12 +706,15 @@ function sendMilkWhatsAppById(id){
 
   const c = getCustomer(record.customerId);
 
-  if(!c || !c.phone){
-    alert("Is customer ka WhatsApp number saved nahi hai.");
+  if(!c || !c.phone || c.phone === "-"){
+    alert("Customer ka WhatsApp number saved nahi hai.");
     return;
   }
 
-  openWhatsApp(c.phone, milkWhatsAppMessage(record));
+  openWhatsApp(
+    c.phone,
+    milkWhatsAppMessage(record)
+  );
 }
 
 function showPage(pageId){
@@ -704,19 +728,22 @@ function showPage(pageId){
 }
 
 function addCustomer(){
-  const name = document.getElementById("customerName").value.trim();
-  const village = document.getElementById("customerVillage").value.trim();
-  const phone = document.getElementById("customerPhone").value.trim();
+  const name =
+    document.getElementById("customerName").value.trim();
+
+  const village =
+    document.getElementById("customerVillage").value.trim();
+
+  const phone =
+    document.getElementById("customerPhone").value.trim();
 
   if(!name){
     alert("Customer name enter karein.");
     return;
   }
 
-  const id = Date.now();
-
   customers.push({
-    id:id,
+    id:Date.now(),
     code:"C" + String(customers.length + 1).padStart(3,"0"),
     name:name,
     village:village || "-",
@@ -738,17 +765,29 @@ function deleteCustomer(id){
     return;
   }
 
-  customers = customers.filter(c => String(c.id) !== String(id));
+  customers = customers.filter(c =>
+    String(c.id) !== String(id)
+  );
+
   saveData();
   render();
 }
 
 function addMilk(){
-  const customerId = document.getElementById("milkCustomer").value;
-  const date = document.getElementById("milkDate").value;
-  const session = document.getElementById("milkSession").value;
-  const qty = Number(document.getElementById("milkQty").value);
-  const rate = Number(document.getElementById("milkRate").value);
+  const customerId =
+    document.getElementById("milkCustomer").value;
+
+  const date =
+    document.getElementById("milkDate").value;
+
+  const session =
+    document.getElementById("milkSession").value;
+
+  const qty =
+    Number(document.getElementById("milkQty").value);
+
+  const rate =
+    Number(document.getElementById("milkRate").value);
 
   if(!customerId){
     alert("Customer select karein.");
@@ -766,7 +805,7 @@ function addMilk(){
   }
 
   if(!rate || rate <= 0){
-    alert("Rate enter karein.");
+    alert("Customer rate enter karein.");
     return;
   }
 
@@ -800,11 +839,11 @@ function addMilk(){
 }
 
 function deleteMilk(id){
-  const record = milk.find(x => String(x.id) === String(id));
+  const record = milk.find(x =>
+    String(x.id) === String(id)
+  );
 
-  if(!record){
-    return;
-  }
+  if(!record) return;
 
   if(record.date !== todayDate()){
     alert("Purane date ka record delete nahi kar sakte.");
@@ -815,15 +854,23 @@ function deleteMilk(id){
     return;
   }
 
-  milk = milk.filter(x => String(x.id) !== String(id));
+  milk = milk.filter(x =>
+    String(x.id) !== String(id)
+  );
+
   saveData();
   render();
 }
 
 function addPayment(){
-  const customerId = document.getElementById("paymentCustomer").value;
-  const date = document.getElementById("paymentDate").value;
-  const amount = Number(document.getElementById("paymentAmount").value);
+  const customerId =
+    document.getElementById("paymentCustomer").value;
+
+  const date =
+    document.getElementById("paymentDate").value;
+
+  const amount =
+    Number(document.getElementById("paymentAmount").value);
 
   if(!customerId){
     alert("Customer select karein.");
@@ -856,11 +903,11 @@ function addPayment(){
 }
 
 function deletePayment(id){
-  const record = payments.find(x => String(x.id) === String(id));
+  const record = payments.find(x =>
+    String(x.id) === String(id)
+  );
 
-  if(!record){
-    return;
-  }
+  if(!record) return;
 
   if(record.date !== todayDate()){
     alert("Purane date ka payment delete nahi kar sakte.");
@@ -871,30 +918,49 @@ function deletePayment(id){
     return;
   }
 
-  payments = payments.filter(x => String(x.id) !== String(id));
+  payments = payments.filter(x =>
+    String(x.id) !== String(id)
+  );
+
   saveData();
   render();
 }
 
 function fillCustomerDropdowns(){
-  const milkSelect = document.getElementById("milkCustomer");
-  const paymentSelect = document.getElementById("paymentCustomer");
-  const statementSelect = document.getElementById("statementCustomer");
+  const milkSelect =
+    document.getElementById("milkCustomer");
+
+  const paymentSelect =
+    document.getElementById("paymentCustomer");
+
+  const statementSelect =
+    document.getElementById("statementCustomer");
 
   const oldMilk = milkSelect.value;
   const oldPayment = paymentSelect.value;
   const oldStatement = statementSelect.value;
 
-  milkSelect.innerHTML = '<option value="">-- Select Customer --</option>';
-  paymentSelect.innerHTML = '<option value="">-- Select Customer --</option>';
-  statementSelect.innerHTML = '<option value="">-- Select Customer --</option>';
+  milkSelect.innerHTML =
+    '<option value="">-- Select Customer --</option>';
+
+  paymentSelect.innerHTML =
+    '<option value="">-- Select Customer --</option>';
+
+  statementSelect.innerHTML =
+    '<option value="">-- Select Customer --</option>';
 
   customers.forEach(c => {
-    const text = `${c.code} - ${c.name} (${c.village})`;
+    const text =
+      `${c.code} - ${c.name} (${c.village})`;
 
-    milkSelect.innerHTML += `<option value="${c.id}">${text}</option>`;
-    paymentSelect.innerHTML += `<option value="${c.id}">${text}</option>`;
-    statementSelect.innerHTML += `<option value="${c.id}">${text}</option>`;
+    milkSelect.innerHTML +=
+      `<option value="${c.id}">${text}</option>`;
+
+    paymentSelect.innerHTML +=
+      `<option value="${c.id}">${text}</option>`;
+
+    statementSelect.innerHTML +=
+      `<option value="${c.id}">${text}</option>`;
   });
 
   milkSelect.value = oldMilk;
@@ -903,7 +969,9 @@ function fillCustomerDropdowns(){
 }
 
 function renderCustomers(){
-  const tbody = document.getElementById("customerTable");
+  const tbody =
+    document.getElementById("customerTable");
+
   tbody.innerHTML = "";
 
   customers.forEach(c => {
@@ -925,137 +993,15 @@ function renderCustomers(){
 }
 
 function renderMilk(){
-  const tbody = document.getElementById("milkTable");
+  const tbody =
+    document.getElementById("milkTable");
+
   tbody.innerHTML = "";
-
-  const sorted = [...milk].sort((a,b) =>
-    b.date.localeCompare(a.date)
-  );
-
-  sorted.forEach(r => {
-    const c = getCustomer(r.customerId);
-    const phone = c ? c.phone : "";
-
-    tbody.innerHTML += `
-      <tr>
-        <td>${r.date}</td>
-        <td>${customerName(r.customerId)}</td>
-        <td>${customerVillage(r.customerId)}</td>
-        <td>${r.session}</td>
-        <td>${r.qty}</td>
-        <td>${money(r.rate)}</td>
-        <td>${money(r.amount)}</td>
-        <td>
-          <button class="btn-whatsapp btn-small"
-            onclick="sendMilkWhatsAppById('${r.id}')">
-            WhatsApp
-          </button>
-        </td>
-        <td>
-          ${
-            r.date === todayDate()
-            ?
-            `<button class="btn-danger btn-small"
-              onclick="deleteMilk('${r.id}')">
-              Delete
-            </button>`
-            :
-            `<span>🔒 Locked</span>`
-          }
-        </td>
-      </tr>
-    `;
-  });
-}
-
-function renderPayments(){
-  const tbody = document.getElementById("paymentTable");
-  tbody.innerHTML = "";
-
-  const sorted = [...payments].sort((a,b) =>
-    b.date.localeCompare(a.date)
-  );
-
-  sorted.forEach(r => {
-    tbody.innerHTML += `
-      <tr>
-        <td>${r.date}</td>
-        <td>${customerName(r.customerId)}</td>
-        <td>${customerVillage(r.customerId)}</td>
-        <td>${money(r.amount)}</td>
-        <td>
-          ${
-            r.date === todayDate()
-            ?
-            `<button class="btn-danger btn-small"
-              onclick="deletePayment('${r.id}')">
-              Delete
-            </button>`
-            :
-            `<span>🔒 Locked</span>`
-          }
-        </td>
-      </tr>
-    `;
-  });
-}
-
-function renderDashboard(){
-  const today = todayDate();
-
-  const todayMilk = milk
-    .filter(x => x.date === today)
-    .reduce((sum,x) => sum + Number(x.qty || 0),0);
-
-  const todayAmount = milk
-    .filter(x => x.date === today)
-    .reduce((sum,x) => sum + Number(x.amount || 0),0);
-
-  const totalMilk = milk
-    .reduce((sum,x) => sum + Number(x.qty || 0),0);
-
-  const totalAmount = milk
-    .reduce((sum,x) => sum + Number(x.amount || 0),0);
-
-  const totalPayments = payments
-    .reduce((sum,x) => sum + Number(x.amount || 0),0);
-
-  const balance = totalAmount - totalPayments;
-
-  document.getElementById("dashCustomers").textContent = customers.length;
-  document.getElementById("dashTodayMilk").textContent = todayMilk.toFixed(2) + " L";
-  document.getElementById("dashTodayAmount").textContent = money(todayAmount);
-  document.getElementById("dashTotalMilk").textContent = totalMilk.toFixed(2) + " L";
-  document.getElementById("dashTotalAmount").textContent = money(totalAmount);
-  document.getElementById("dashPayments").textContent = money(totalPayments);
-  document.getElementById("dashBalance").textContent = money(balance);
-}
-
-function renderAllRecords(){
-  const totalMilk = milk.reduce((sum,x) => sum + Number(x.qty || 0),0);
-  const totalAmount = milk.reduce((sum,x) => sum + Number(x.amount || 0),0);
-  const totalPayments = payments.reduce((sum,x) => sum + Number(x.amount || 0),0);
-  const balance = totalAmount - totalPayments;
-
-  document.getElementById("recordTotalMilk").textContent =
-    totalMilk.toFixed(2) + " L";
-
-  document.getElementById("recordTotalAmount").textContent =
-    money(totalAmount);
-
-  document.getElementById("recordTotalPayments").textContent =
-    money(totalPayments);
-
-  document.getElementById("recordBalance").textContent =
-    money(balance);
-
-  const milkBody = document.getElementById("allMilkTable");
-  milkBody.innerHTML = "";
 
   [...milk]
     .sort((a,b) => b.date.localeCompare(a.date))
     .forEach(r => {
-      milkBody.innerHTML += `
+      tbody.innerHTML += `
         <tr>
           <td>${r.date}</td>
           <td>${customerName(r.customerId)}</td>
@@ -1064,165 +1010,15 @@ function renderAllRecords(){
           <td>${r.qty}</td>
           <td>${money(r.rate)}</td>
           <td>${money(r.amount)}</td>
-        </tr>
-      `;
-    });
+          <td>
+            <button class="btn-whatsapp btn-small"
+              onclick="sendMilkWhatsAppById('${r.id}')">
+              WhatsApp
+            </button>
+          </td>
+          <td>
+            ${
+              r.date
+  
 
-  const paymentBody = document.getElementById("allPaymentTable");
-  paymentBody.innerHTML = "";
-
-  [...payments]
-    .sort((a,b) => b.date.localeCompare(a.date))
-    .forEach(r => {
-      paymentBody.innerHTML += `
-        <tr>
-          <td>${r.date}</td>
-          <td>${customerName(r.customerId)}</td>
-          <td>${customerVillage(r.customerId)}</td>
-          <td>${money(r.amount)}</td>
-        </tr>
-      `;
-    });
-}
-
-function renderStatement(){
-  const customerId = document.getElementById("statementCustomer").value;
-
-  const info = document.getElementById("statementCustomerInfo");
-  const milkBody = document.getElementById("statementMilkTable");
-  const paymentBody = document.getElementById("statementPaymentTable");
-
-  milkBody.innerHTML = "";
-  paymentBody.innerHTML = "";
-
-  if(!customerId){
-    info.innerHTML = "";
-    document.getElementById("statementMilk").textContent = "0 L";
-    document.getElementById("statementMilkAmount").textContent = "₹0";
-    document.getElementById("statementPayments").textContent = "₹0";
-    document.getElementById("statementBalance").textContent = "₹0";
-    return;
-  }
-
-  const c = getCustomer(customerId);
-
-  const customerMilk = milk.filter(x =>
-    String(x.customerId) === String(customerId)
-  );
-
-  const customerPayments = payments.filter(x =>
-    String(x.customerId) === String(customerId)
-  );
-
-  const totalLitres = customerMilk.reduce((sum,x) =>
-    sum + Number(x.qty || 0),0
-  );
-
-  const totalMilkAmount = customerMilk.reduce((sum,x) =>
-    sum + Number(x.amount || 0),0
-  );
-
-  const totalPaid = customerPayments.reduce((sum,x) =>
-    sum + Number(x.amount || 0),0
-  );
-
-  const balance = totalMilkAmount - totalPaid;
-
-  info.innerHTML = `
-    <div class="info">
-      <b>Customer:</b> ${c.name}<br>
-      <b>Village:</b> ${c.village}<br>
-      <b>WhatsApp:</b> ${c.phone}
-    </div>
-  `;
-
-  document.getElementById("statementMilk").textContent =
-    totalLitres.toFixed(2) + " L";
-
-  document.getElementById("statementMilkAmount").textContent =
-    money(totalMilkAmount);
-
-  document.getElementById("statementPayments").textContent =
-    money(totalPaid);
-
-  document.getElementById("statementBalance").textContent =
-    money(balance);
-
-  [...customerMilk]
-    .sort((a,b) => b.date.localeCompare(a.date))
-    .forEach(r => {
-      milkBody.innerHTML += `
-        <tr>
-          <td>${r.date}</td>
-          <td>${r.session}</td>
-          <td>${r.qty}</td>
-          <td>${money(r.rate)}</td>
-          <td>${money(r.amount)}</td>
-        </tr>
-      `;
-    });
-
-  [...customerPayments]
-    .sort((a,b) => b.date.localeCompare(a.date))
-    .forEach(r => {
-      paymentBody.innerHTML += `
-        <tr>
-          <td>${r.date}</td>
-          <td>${money(r.amount)}</td>
-        </tr>
-      `;
-    });
-}
-
-function updateMilkPreview(){
-  const qty = Number(document.getElementById("milkQty").value || 0);
-  const rate = Number(document.getElementById("milkRate").value || 0);
-
-  document.getElementById("milkAmountPreview").textContent =
-    (qty * rate).toFixed(2);
-}
-
-function setDateLimits(){
-  const today = new Date();
-
-  const past = new Date();
-  past.setMonth(past.getMonth() - 1);
-
-  const future = new Date();
-  future.setFullYear(future.getFullYear() + 1);
-
-  const formatDate = d => d.toISOString().split("T")[0];
-
-  document.getElementById("milkDate").min = formatDate(past);
-  document.getElementById("milkDate").max = formatDate(future);
-  document.getElementById("paymentDate").min = formatDate(past);
-  document.getElementById("paymentDate").max = formatDate(future);
-
-  document.getElementById("milkDate").value = todayDate();
-  document.getElementById("paymentDate").value = todayDate();
-}
-
-function render(){
-  fillCustomerDropdowns();
-  renderCustomers();
-  renderMilk();
-  renderPayments();
-  renderDashboard();
-  renderAllRecords();
-  renderStatement();
-}
-
-document.getElementById("milkQty").addEventListener(
-  "input", updateMilkPreview
-);
-
-document.getElementById("milkRate").addEventListener(
-  "input", updateMilkPreview
-);
-
-setDateLimits();
-render();
-</script>
-
-</body>
-</html>
+  
